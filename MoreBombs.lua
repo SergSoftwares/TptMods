@@ -1,3 +1,5 @@
+local rnd=math.random(1,4)
+tpt.message_box("Mo'Bombs V 0.0.7")
 elements.property(elements.DEFAULT_PT_NBLE,"Name","HLUM")
 elements.property(elements.DEFAULT_PT_NBLE,"Colour","0x0000ff")
 elements.property(elements.DEFAULT_PT_NBLE,"Description","Helium. Conductive, Ionizes into plasma when sparked.")
@@ -116,3 +118,53 @@ elements.property(el6,"MenuVisible",1)
 elements.property(el6,"MenuSection",5)
 elements.property(el6,"Falldown",2)
 elements.property(el6,"Explosive",2)
+local el7 = elements.allocate("EXPLOSIVE", "SMTR")
+elements.property(el7,"Advection",1)
+elements.property(el7,"Loss",1)
+elements.property(el7,"Collision",-0.1)
+elements.property(el7,"Meltable",0)
+elements.property(el7,"Hardness",0)
+elements.property(el7,"Description","Strange matter. Totally random element. I can't say nothing about it but it's a powder. Not complete yet")
+elements.property(el7,"Name","SMTR")
+elements.property(el7,"MenuVisible",1)
+elements.property(el7,"MenuSection",5)
+
+function rand()
+
+rnd=math.random(1,4)
+if rnd == 1 then
+elements.property(el7,"Colour","0x00FF00")
+rnd=math.random(1,4)
+end
+if rnd == 2 then
+elements.property(el7,"Colour","0xffffff")
+rnd=math.random(1,4)
+end
+if rnd ==3 then
+elements.property(el7,"Colour","0x0f00cf")
+rnd=math.random(1,4)
+end
+
+if rnd ==1 then
+elements.property(el7,"State",ST_GAS)
+rnd=math.random(1,4)
+end
+if rnd == 2 then
+elements.property(el7,"State",ST_LIQUID)
+rnd=math.random(1,4)
+end
+if rnd ==3 then
+elements.property(el7,"State",ST_POWDER)
+rnd=math.random(1,4)
+end
+elements.property(el7,"Gravity",math.random(0,0.1))
+elements.property(el7,"Flammable",(math.floor(math.random(0,999))))
+elements.property(el7,"Weight",(math.floor(math.random(0,99))))
+elements.property(el7,"Gravity",math.random(0,0.1))
+elements.property(el7,"Flammable",(math.floor(math.random(0,999))))
+elements.property(el7,"Falldown",2)
+elements.property(el7,"Explosive",(math.floor(math.random(0,1))))
+end
+rand()
+tpt.register_step(rand())
+rand()
