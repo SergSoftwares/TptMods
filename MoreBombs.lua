@@ -23,7 +23,7 @@ elements.property(el,"Meltable",0)
 elements.property(el,"Hardness",3)
 elements.property(el,"Weight",99)
 elements.property(el,"Description","Explosive powder. Flammable")
-elements.property(el,"State",ST_SOLID)
+elements.property(el,"State",1)
 elements.property(el,"Properties",TYPE_PART)
 elements.property(el,"Colour","0xff0000")
 elements.property(el,"Name","PWDE")
@@ -42,7 +42,7 @@ elements.property(el2,"Meltable",1)
 elements.property(el2,"Hardness",3)
 elements.property(el2,"Weight",0)
 elements.property(el2,"Description","No-gravity explosive.")
-elements.property(el2,"State",ST_SOLID)
+elements.property(el2,"State",1)
 elements.property(el2,"Colour","0x0000ff")
 elements.property(el2,"Name","FLTE")
 elements.property(el2,"MenuVisible",1)
@@ -60,7 +60,7 @@ elements.property(el3,"Meltable",0)
 elements.property(el3,"Hardness",3)
 elements.property(el3,"Weight",98)
 elements.property(el3,"Description","Black powder. Basic explosive")
-elements.property(el3,"State",ST_SOLID)
+elements.property(el3,"State",1)
 elements.property(el3,"Colour","0x0f0f0f")
 elements.property(el3,"Name","BPWD")
 elements.property(el3,"MenuVisible",1)
@@ -77,7 +77,7 @@ elements.property(el4,"Meltable",0)
 elements.property(el4,"Hardness",100)
 elements.property(el4,"Weight",5)
 elements.property(el4,"Description","Nitrocellulose. Pressure sensitive.Not completed yet")
-elements.property(el4,"State",ST_SOLID)
+elements.property(el4,"State",1)
 elements.property(el4,"Colour","0xffffff")
 elements.property(el4,"Name","NCLS")
 elements.property(el4,"MenuVisible",1)
@@ -94,7 +94,7 @@ elements.property(el5,"Meltable",0)
 elements.property(el5,"Hardness",1)
 elements.property(el5,"Weight",5)
 elements.property(el5,"Description","Molotov cocktail. Flammable liquid, Slowly burning.")
-elements.property(el5,"State",ST_LIQUID)
+elements.property(el5,"State",2)
 elements.property(el5,"Colour","0x333300")
 elements.property(el5,"Name","MLTV")
 elements.property(el5,"MenuVisible",1)
@@ -111,10 +111,144 @@ elements.property(el6,"Meltable",0)
 elements.property(el6,"Hardness",1)
 elements.property(el6,"Weight",5)
 elements.property(el6,"Description","Alcohol. Flammable liquid, Fast burning.")
-elements.property(el6,"State",ST_LIQUID)
+elements.property(el6,"State",2)
 elements.property(el6,"Colour","0xCCFFFF")
 elements.property(el6,"Name","ALCH")
 elements.property(el6,"MenuVisible",1)
 elements.property(el6,"MenuSection",5)
 elements.property(el6,"Falldown",2)
 elements.property(el6,"Explosive",2)
+local el5 = elements.allocate("EXPLOSIVE", "DETN")
+elements.property(el5,"Advection",0)
+elements.property(el5,"Loss",1)
+elements.property(el5,"Collision",0)
+elements.property(el5,"Gravity",0)
+elements.property(el5,"Flammable",25)
+elements.property(el5,"Meltable",0)
+elements.property(el5,"Hardness",100)
+elements.property(el5,"Weight",5)
+elements.property(el5,"Description","Electronic detonator. Movable (like goo and nitrocellulose)")
+elements.property(el5,"State",1)
+elements.property(el5,"Colour","0x505050")
+elements.property(el5,"Name","DETN")
+elements.property(el5,"MenuVisible",1)
+elements.property(el5,"MenuSection",5)
+elements.property(el5,"Falldown",0)
+elements.property(el5,"Explosive",90)
+local el6 = elements.allocate("EXPLOSIVE", "NBMB")
+elements.property(el6,"Advection",0)
+elements.property(el6,"Loss",1)
+elements.property(el6,"Collision",0)
+elements.property(el6,"Gravity",0)
+elements.property(el6,"Flammable",0)
+elements.property(el6,"Meltable",0)
+elements.property(el6,"Hardness",100)
+elements.property(el6,"Weight",5)
+elements.property(el6,"Description","Neutron Bomb. Activated by electricity or neutrons. Works well, but unfinished. You can use it!")
+elements.property(el6,"State",1)
+elements.property(el6,"Colour","0x011040")
+elements.property(el6,"Name","NBMB")
+elements.property(el6,"MenuVisible",1)
+elements.property(el6,"MenuSection",5)
+elements.property(el6,"Falldown",0)
+elements.property(el6,"Explosive",0)
+local el7 = elements.allocate("EXPLOSIVE", "FRAG")
+elements.property(el7,"Advection",0)
+elements.property(el7,"Loss",1)
+elements.property(el7,"Collision",0)
+elements.property(el7,"Gravity",0)
+elements.property(el7,"Flammable",0)
+elements.property(el7,"Meltable",0)
+elements.property(el7,"Hardness",100)
+elements.property(el7,"Weight",5)
+elements.property(el7,"Description","Frag grenade. Explodes in glass shards")
+elements.property(el7,"State",1)
+elements.property(el7,"Colour","0x104010")
+elements.property(el7,"Name","FRAG")
+elements.property(el7,"MenuVisible",1)
+elements.property(el7,"MenuSection",5)
+elements.property(el7,"Falldown",0)
+elements.property(el7,"Explosive",0)
+local el8 = elements.allocate("EXPLOSIVE", "TBMB")
+elements.property(el8,"Advection",0)
+elements.property(el8,"Loss",1)
+elements.property(el8,"Collision",0)
+elements.property(el8,"Gravity",0)
+elements.property(el8,"Flammable",0)
+elements.property(el8,"Meltable",0)
+elements.property(el8,"Hardness",100)
+elements.property(el8,"Weight",5)
+elements.property(el8,"Description","Time bomb.Incomplete, don't works.")
+elements.property(el8,"State",1)
+elements.property(el8,"Colour","0x903030")
+elements.property(el8,"Name","TBMB")
+elements.property(el8,"MenuVisible",1)
+elements.property(el8,"MenuSection",5)
+elements.property(el8,"Falldown",0)
+elements.property(el8,"Explosive",0)
+local function DETN(index, partx, party, surround_space, nt)
+        if nt > 0 then
+                for fx = -1, 1, 1 do
+                        for fy = -1, 1, 1 do
+                                if (tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_SPRK or tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_FIRE ) then
+                                        local chance = math.random(1, 2)
+                                        if (chance == 1) then
+                                                sim.partChangeType(index, elements.DEFAULT_PT_FIRE)
+                                                sim.partKill(partx + fx, party + fy)
+                                                return
+                                        end
+                                end
+                        end
+                end
+        end
+end
+local function NBMB(index, partx, party, surround_space, nt)
+        if nt > 0 then
+                for fx = -1, 1, 1 do
+                        for fy = -1, 1, 1 do
+                                if (tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_SPRK or tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_NEUT ) then
+                                        local chance = 1
+                                        if (chance == 1) then
+												sim.partChangeType(index, elements.DEFAULT_PT_NEUT)
+												sim.partProperty(index,"vx",math.random(-2, 2))
+												sim.partProperty(index,"vy",math.random(-2, 2))
+                                                return
+                                        end
+                                end
+                        end
+                end
+        end
+end
+local function FRAG(index, partx, party, surround_space, nt)
+        if nt > 0 then
+                for fx = -1, 1, 1 do
+                        for fy = -1, 1, 1 do
+                                if (tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_SPRK or tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_FIRE ) then
+                                        local chance = math.random(1, 2)
+                                        if (chance == 1) then
+                                                sim.partChangeType(index, elements.DEFAULT_PT_BGLA)
+												sim.partCreate(partx,party+1,elements.DEFAULT_PT_SPRK)
+                                                sim.pressure(partx/4,party/4,30)
+                                                return
+                                        end
+                                end
+                        end
+                end
+        end
+end
+local function TBMB(index, partx, party, surround_space, nt)
+        if nt > 0 then
+                for fx = -1, 1, 1 do
+                        for fy = -1, 1, 1 do
+                                if (tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_SPRK or tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_FIRE ) then
+										tpt.set_property("dcolour","0xff9090",index)
+                                end
+                                  return
+                                end
+                        end
+                end
+        end
+elements.property(el5,"Update",DETN)
+elements.property(el6,"Update",NBMB)
+elements.property(el7,"Update",FRAG)
+elements.property(el8,"Update",TBMB)
