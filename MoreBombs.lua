@@ -253,7 +253,7 @@ local function FRAG(index, partx, party, surround_space, nt)
                 end
         end
 end
-local counter = 0;
+counter = 0;
 local function DRPT(index, partx, party, surround_space, nt)
         if nt > 0 then
                 for fx = -1, 1, 1 do
