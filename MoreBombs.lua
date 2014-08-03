@@ -186,6 +186,23 @@ elements.property(el8,"MenuVisible",1)
 elements.property(el8,"MenuSection",5)
 elements.property(el8,"Falldown",0)
 elements.property(el8,"Explosive",0)
+local el9 = elements.allocate("EXPLOSIVE", "DRPT")
+elements.property(el9,"Advection",0)
+elements.property(el9,"Loss",1)
+elements.property(el9,"Collision",0)
+elements.property(el9,"Gravity",0)
+elements.property(el9,"Flammable",0)
+elements.property(el9,"Meltable",0)
+elements.property(el9,"Hardness",100)
+elements.property(el9,"Weight",5)
+elements.property(el9,"Description","Disruptor. When placed, destroys all the particles placed before it pixel by pixel")
+elements.property(el9,"State",1)
+elements.property(el9,"Colour","0x1010ff")
+elements.property(el9,"Name","DRPT")
+elements.property(el9,"MenuVisible",1)
+elements.property(el9,"MenuSection",5)
+elements.property(el9,"Falldown",0)
+elements.property(el9,"Explosive",0)
 local function DETN(index, partx, party, surround_space, nt)
         if nt > 0 then
                 for fx = -1, 1, 1 do
@@ -223,7 +240,7 @@ local function FRAG(index, partx, party, surround_space, nt)
         if nt > 0 then
                 for fx = -1, 1, 1 do
                         for fy = -1, 1, 1 do
-                                if (tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_SPRK or tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_FIRE ) then
+                                if (tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_SPRK or tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_FIRE or tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_BGLA) then
                                         local chance = math.random(1, 2)
                                         if (chance == 1) then
                                                 sim.partChangeType(index, elements.DEFAULT_PT_BGLA)
@@ -236,19 +253,26 @@ local function FRAG(index, partx, party, surround_space, nt)
                 end
         end
 end
-local function TBMB(index, partx, party, surround_space, nt)
+local counter = 0;
+local function DRPT(index, partx, party, surround_space, nt)
         if nt > 0 then
                 for fx = -1, 1, 1 do
                         for fy = -1, 1, 1 do
-                                if (tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_SPRK or tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_FIRE ) then
-										tpt.set_property("dcolour","0xff9090",index)
-                                end
-                                  return
-                                end
+                                                if(counter<index) then
+													sim.partKill(counter)
+													counter = counter + 1
+												end
+												if(counter==index) then
+													counter = 0
+													sim.partKill(index)
+												end
                         end
                 end
         end
+end
+        
 elements.property(el5,"Update",DETN)
 elements.property(el6,"Update",NBMB)
 elements.property(el7,"Update",FRAG)
-elements.property(el8,"Update",TBMB)
+
+elements.property(el9,"Update",DRPT)
