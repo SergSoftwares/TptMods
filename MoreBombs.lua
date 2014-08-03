@@ -1,5 +1,5 @@
 local rnd=math.random(1,4)
-tpt.message_box("Mo'Bombs V 0.1.5")
+tpt.message_box("Mo'Bombs V 0.2.0")
 elements.property(elements.DEFAULT_PT_NBLE,"Name","HLUM")
 elements.property(elements.DEFAULT_PT_NBLE,"Colour","0x0000ff")
 elements.property(elements.DEFAULT_PT_NBLE,"Description","Helium. Conductive, Ionizes into plasma when sparked.")
