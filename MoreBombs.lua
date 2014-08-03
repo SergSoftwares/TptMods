@@ -203,6 +203,23 @@ elements.property(el9,"MenuVisible",1)
 elements.property(el9,"MenuSection",5)
 elements.property(el9,"Falldown",0)
 elements.property(el9,"Explosive",0)
+local el10 = elements.allocate("EXPLOSIVE", "DEBG")
+elements.property(el10,"Advection",0)
+elements.property(el10,"Loss",1)
+elements.property(el10,"Collision",0)
+elements.property(el10,"Gravity",0)
+elements.property(el10,"Flammable",0)
+elements.property(el10,"Meltable",0)
+elements.property(el10,"Hardness",100)
+elements.property(el10,"Weight",5)
+elements.property(el10,"Description","Un-bugs the DRPT particle")
+elements.property(el10,"State",1)
+elements.property(el10,"Colour","0x209010")
+elements.property(el10,"Name","DEBG")
+elements.property(el10,"MenuVisible",1)
+elements.property(el10,"MenuSection",5)
+elements.property(el10,"Falldown",0)
+elements.property(el10,"Explosive",0)
 local function DETN(index, partx, party, surround_space, nt)
         if nt > 0 then
                 for fx = -1, 1, 1 do
@@ -270,9 +287,19 @@ local function DRPT(index, partx, party, surround_space, nt)
                 end
         end
 end
+local function DEBG(index, partx, party, surround_space, nt)
+        if nt > 0 then
+                for fx = -1, 1, 1 do
+                        for fy = -1, 1, 1 do
+                        counter = 0
+						sim.partKill(index)
+                        end
+                end
+        end
+end
         
 elements.property(el5,"Update",DETN)
 elements.property(el6,"Update",NBMB)
 elements.property(el7,"Update",FRAG)
-
 elements.property(el9,"Update",DRPT)
+elements.property(el10,"Update",DEBG)
