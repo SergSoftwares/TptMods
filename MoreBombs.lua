@@ -16,7 +16,7 @@ elements.property(elements.DEFAULT_PT_MORT,"MenuSection",11)
 local el = elements.allocate("EXPLOSIVE", "PWEX")
 elements.property(el,"Advection",0.4)
 elements.property(el,"Loss",0.95)
-elements.property(el,"Collision",-100)
+elements.property(el,"Collision",0.1)
 elements.property(el,"Gravity",0.1)
 elements.property(el,"Flammable",100)
 elements.property(el,"Meltable",0)
@@ -53,7 +53,7 @@ elements.property(el2,"LowTemperature",ITH)
 local el3 = elements.allocate("EXPLOSIVE", "BPWD")
 elements.property(el3,"Advection",0.4)
 elements.property(el3,"Loss",0.95)
-elements.property(el3,"Collision",-100)
+elements.property(el3,"Collision",0.1)
 elements.property(el3,"Gravity",0.1)
 elements.property(el3,"Flammable",25)
 elements.property(el3,"Meltable",0)
@@ -75,7 +75,7 @@ elements.property(el4,"Gravity",0)
 elements.property(el4,"Flammable",25)
 elements.property(el4,"Meltable",0)
 elements.property(el4,"Hardness",100)
-elements.property(el4,"Weight",5)
+elements.property(el4,"Weight",100)
 elements.property(el4,"Description","Nitrocellulose. Pressure sensitive.Not completed yet")
 elements.property(el4,"State",1)
 elements.property(el4,"Colour","0xffffff")
@@ -87,12 +87,12 @@ elements.property(el4,"Explosive",90)
 local el5 = elements.allocate("EXPLOSIVE", "MLTV")
 elements.property(el5,"Advection",0)
 elements.property(el5,"Loss",1)
-elements.property(el5,"Collision",-100)
+elements.property(el5,"Collision",0.1)
 elements.property(el5,"Gravity",0.1)
 elements.property(el5,"Flammable",4)
 elements.property(el5,"Meltable",0)
 elements.property(el5,"Hardness",1)
-elements.property(el5,"Weight",5)
+elements.property(el5,"Weight",1)
 elements.property(el5,"Description","Molotov cocktail. Flammable liquid, Slowly burning.")
 elements.property(el5,"State",2)
 elements.property(el5,"Colour","0x333300")
@@ -100,11 +100,11 @@ elements.property(el5,"Name","MLTV")
 elements.property(el5,"MenuVisible",1)
 elements.property(el5,"MenuSection",5)
 elements.property(el5,"Falldown",2)
-elements.property(el5,"Explosive",0)
+elements.property(el5,"Explosive",10)
 local el6 = elements.allocate("EXPLOSIVE", "ALCH")
 elements.property(el6,"Advection",0)
 elements.property(el6,"Loss",1)
-elements.property(el6,"Collision",-100)
+elements.property(el6,"Collision",0.1)
 elements.property(el6,"Gravity",0.1)
 elements.property(el6,"Flammable",100)
 elements.property(el6,"Meltable",0)
@@ -121,13 +121,13 @@ elements.property(el6,"Explosive",2)
 local el5 = elements.allocate("EXPLOSIVE", "DETN")
 elements.property(el5,"Advection",0)
 elements.property(el5,"Loss",1)
-elements.property(el5,"Collision",-100)
+elements.property(el5,"Collision",0.1)
 elements.property(el5,"Gravity",0)
 elements.property(el5,"Flammable",25)
 elements.property(el5,"Meltable",0)
 elements.property(el5,"Hardness",100)
 elements.property(el5,"Weight",100)
-elements.property(el5,"Description","Electronic detonator. Movable (like goo and nitrocellulose)")
+elements.property(el5,"Description","Electronic detonator.")
 elements.property(el5,"State",1)
 elements.property(el5,"Colour","0x505050")
 elements.property(el5,"Name","DETN")
@@ -138,7 +138,7 @@ elements.property(el5,"Explosive",90)
 local el6 = elements.allocate("EXPLOSIVE", "NBMB")
 elements.property(el6,"Advection",0)
 elements.property(el6,"Loss",1)
-elements.property(el6,"Collision",-100)
+elements.property(el6,"Collision",0.1)
 elements.property(el6,"Gravity",0)
 elements.property(el6,"Flammable",0)
 elements.property(el6,"Meltable",0)
@@ -155,7 +155,7 @@ elements.property(el6,"Explosive",0)
 local el7 = elements.allocate("EXPLOSIVE", "FRAG")
 elements.property(el7,"Advection",0)
 elements.property(el7,"Loss",1)
-elements.property(el7,"Collision",-100)
+elements.property(el7,"Collision",0.1)
 elements.property(el7,"Gravity",0)
 elements.property(el7,"Flammable",0)
 elements.property(el7,"Meltable",0)
@@ -220,6 +220,25 @@ elements.property(el10,"MenuVisible",1)
 elements.property(el10,"MenuSection",5)
 elements.property(el10,"Falldown",0)
 elements.property(el10,"Explosive",0)
+
+local tel1 = elements.allocate("EXPLOSIVE", "GROW")
+elements.property(tel1,"Advection",0)
+elements.property(tel1,"Loss",1)
+elements.property(tel1,"Collision",0)
+elements.property(tel1,"Gravity",0)
+elements.property(tel1,"Flammable",0)
+elements.property(tel1,"Meltable",0)
+elements.property(tel1,"Hardness",100)
+elements.property(tel1,"Weight",100)
+elements.property(tel1,"Description","TEST ELEMENT- Growing particle. Destroys your save")
+elements.property(tel1,"State",1)
+elements.property(tel1,"Colour","0xff1010")
+elements.property(tel1,"Name","GROW")
+elements.property(tel1,"MenuVisible",1)
+elements.property(tel1,"MenuSection",5)
+elements.property(tel1,"Falldown",0)
+elements.property(tel1,"Explosive",0)
+
 local function DETN(index, partx, party, surround_space, nt)
         if nt > 0 then
                 for fx = -1, 1, 1 do
@@ -297,9 +316,68 @@ local function DEBG(index, partx, party, surround_space, nt)
                 end
         end
 end
-        
+
+local function GROW(index, partx, party, surround_space, nt)
+        if nt > 0 then
+                for fx = -1, 1, 1 do
+                        for fy = -1, 1, 1 do
+								local a = 1
+                                if (a == 1) then
+                                        local chance = math.random(1, 2)
+                                        if (chance == 1) then
+                                                sim.partCreate(partx,party,elements.EXPLOSIVE_PT_GROW)
+                                                return
+                                        end
+                                end
+                        end
+                end
+        end
+end
+
+local function REACTIONS_SPNG(index, partx, party, surround_space, nt)
+        if nt > 0 then
+                for fx = -1, 1, 1 do
+                        for fy = -1, 1, 1 do
+                                if (tpt.get_property('type', partx + fx, party +fy) == elements.DEFAULT_PT_NITR) then
+                                        local chance = math.random(1, 2)
+                                        if (chance == 1) then
+                                                sim.partChangeType(index, elements.EXPLOSIVE_PT_NCLS)
+                                                return
+                                        end
+								elseif (tpt.get_property('type', partx + fx, party +fy) == elements.EXPLOSIVE_PT_NCLS) then
+                                        local chance = math.random(1, 2)
+                                        if (chance == 1) then
+                                                sim.partChangeType(index, elements.EXPLOSIVE_PT_NCLS)
+                                                return
+                                        end
+                                end
+                        end
+                end
+        end
+end
+
+local function REACTIONS_OIL(index, partx, party, surround_space, nt)
+        if nt > 0 then
+                for fx = -1, 1, 1 do
+                        for fy = -1, 1, 1 do
+                                if (tpt.get_property('type', partx + fx, party +fy) == elements.EXPLOSIVE_PT_ALCH) then
+                                        local chance = math.random(1, 2)
+                                        if (chance == 1) then
+                                                sim.partChangeType(index, elements.EXPLOSIVE_PT_MLTV)
+                                                return
+                                        end
+                                end
+                        end
+                end
+        end
+end
+
+
 elements.property(el5,"Update",DETN)
 elements.property(el6,"Update",NBMB)
 elements.property(el7,"Update",FRAG)
 elements.property(el9,"Update",DRPT)
 elements.property(el10,"Update",DEBG)
+elements.property(elements.DEFAULT_PT_SPNG,"Update",REACTIONS_SPNG)
+elements.property(elements.DEFAULT_PT_OIL,"Update",REACTIONS_OIL)
+elements.property(tel1,"Update",GROW)
