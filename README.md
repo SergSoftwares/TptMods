@@ -10,4 +10,4 @@ The Powder toy mods in lua
 <h1>Mods</h1>
 <h2>  More Bombs [0.2.0]</h2>
 <h3>      Features:</h3>
-<p>           Explosives, menu changes and the world disruptor(destroys the actual save)</p>
+<p>           Explosives, menu changes and the world disruptor(destroys the currently opened save)</p>
